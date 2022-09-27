@@ -4,6 +4,9 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+ - group: dockerhub
+
 steps:
   - script: |
       java --version
@@ -18,8 +21,11 @@ steps:
       ./gradlew build -x test
     displayName: 'Create jar'
   - script: |  
-      docker build --tag simple-java-app:1.0 .
+      docker build --tag lecsobkw/simplejavaapp:1.0 .
       docker images
     displayName: 'Build docker image'
-  
+  - script: |
+      docker login -u $(username) -p $(password) 
+      docker push lecsobkw/simplejavaapp:1.0
+    displayName: 'Push docker image'
     

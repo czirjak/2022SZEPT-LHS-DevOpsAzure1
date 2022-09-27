@@ -1,0 +1,10 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - script: |
+      java --version
+    displayName: 'Checking Java Version'

@@ -8,3 +8,17 @@ steps:
   - script: |
       java --version
     displayName: 'Checking Java Version'
+  - script: |
+      ./gradlew clean compileTest
+    displayName: 'Compile files'
+  - script: |
+      ./gradlew test -x compileTest
+    displayName: 'Run tests'
+  - script: |
+      ./gradlew build -x test
+    displayName: 'Create jar'
+  - script: |  
+      docker ps
+    displayName: 'Check running docker containers'
+    
+    

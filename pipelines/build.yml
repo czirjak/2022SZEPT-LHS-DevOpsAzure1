@@ -18,7 +18,7 @@ steps:
       ./gradlew build -x test
     displayName: 'Create jar'
   - script: |  
-      docker build --tag SimpleJavaApp:1.0 .
+      docker build --tag simple-java-app:1.0 .
       docker images
     displayName: 'Build docker image'
   

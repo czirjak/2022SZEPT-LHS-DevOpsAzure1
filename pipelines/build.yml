@@ -6,8 +6,7 @@ pool:
 
 variables:
  - group: dockerhub
- - name: version
- - value: git rev-parse HEAD
+ - version: $(git rev-parse HEAD)
 
 steps:
   - script: |

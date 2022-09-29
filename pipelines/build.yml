@@ -26,6 +26,7 @@ steps:
     displayName: 'Build docker image'
 # itt még futtatunk teszteket stb.
   - script: |
+      chmod 777 ./tag.sh
       ls -l
       ./tag.sh $(version)
     displayName: 'Tag git branch'

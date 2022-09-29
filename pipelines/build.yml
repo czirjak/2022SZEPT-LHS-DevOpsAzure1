@@ -37,9 +37,9 @@ steps:
     displayName: 'Running tests on container'
   - script: |
       chmod 777 ./tag.sh
-      ls -l
       ./tag.sh $(version)
     displayName: 'Tag git branch'
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
   - script: |
       docker login -u $(username) -p $(password)
       docker tag lecsobkw/simplejavaapp lecsobkw/simplejavaapp:$(version)

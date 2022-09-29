@@ -21,11 +21,17 @@ steps:
       ./gradlew build -x test
     displayName: 'Create jar'
   - script: |  
-      docker build --tag lecsobkw/simplejavaapp:1.0 .
+      docker build --tag lecsobkw/simplejavaapp .
       docker images
     displayName: 'Build docker image'
+# itt még futtatunk teszteket stb.
   - script: |
-      docker login -u $(username) -p $(password) 
-      docker push lecsobkw/simplejavaapp:1.0
+      ls -l
+      ./tag.sh $(version)
+    displayName: 'Tag git branch'
+  - script: |
+      docker login -u $(username) -p $(password)
+      docker tag lecsobkw/simplejavaapp lecsobkw/simplejavaapp:$(version)
+      docker push lecsobkw/simplejavaapp:$(version)
     displayName: 'Push docker image'
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))

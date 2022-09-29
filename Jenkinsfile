@@ -1,20 +1,35 @@
-pipeline {
+pipeline
+{
     agent any
 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
+    stages
+    {
+        stage('Compile')
+        {
+            steps
+            {
+                sh "./gradlew clean compileTest"
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
+        stage('Test')
+        {
+            steps
+            {
+                sh "./gradlew test -x compileTest"
             }
         }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+        stage('Build')
+        {
+            steps
+            {
+                sh "./gradlew build -x test"
+            }
+        }
+        stage('Build docker image')
+        {
+            steps 
+            {
+                sh "docker build --tag lecsobkw/simplejavaapp ."
             }
         }
     }

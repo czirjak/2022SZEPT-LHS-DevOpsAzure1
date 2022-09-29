@@ -2,7 +2,7 @@ pipeline
 {
     agent any
 
-    envinronment
+    environment
     {
         DOCKER_SECRET = credentials("lecsobkw-docker")
     }

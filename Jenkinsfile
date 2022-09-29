@@ -2,6 +2,11 @@ pipeline
 {
     agent any
 
+    envinronment
+    {
+        DOCKER_SECRET = credentials("lecsobkw-docker")
+    }
+    
     stages
     {
         stage('Compile')
@@ -43,9 +48,16 @@ pipeline
         {
             steps
             {
-                sh "chmod 777 ./tag.sh"
-                sh "ls -l"
-                sh "./tag.sh 5.0"
+                echo 'TODO'
+            }
+        }
+        stage('Push docker image')
+        {
+            steps
+            {
+                sh "docker login -u $DOCKER_SECRET_USR -p $DOCKER_SECRET_PSW"
+                sh "docker tag lecsobkw/simplejavaapp lecsobkw/simplejavaapp:5.0"
+                sh "docker push lecsobkw/simplejavaapp:5.0"
             }
         }
     }

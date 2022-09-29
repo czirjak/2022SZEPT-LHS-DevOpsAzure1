@@ -6,7 +6,7 @@ pool:
 
 variables:
  - group: dockerhub
- . group: ssh
+ - group: ssh
  - name: version
    value: $(git rev-parse HEAD)
 

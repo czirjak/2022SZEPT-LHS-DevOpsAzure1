@@ -13,7 +13,7 @@ variables:
 steps:
   - task: InstallSSHKey@0
     inputs:
-      knownHostEntry: $(knownHosts)
+      knownHostsEntry: $(knownHosts)
       sshPublicKey: $(publicKey)
       sshKeySecureFile: 'id_rsa'
   - script: |

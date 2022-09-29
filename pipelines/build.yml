@@ -6,10 +6,16 @@ pool:
 
 variables:
  - group: dockerhub
+ . group: ssh
  - name: version
    value: $(git rev-parse HEAD)
 
 steps:
+  - task: InstallSSHKey@0
+    inputs:
+      knownHostEntry: $(knownHosts)
+      sshPublicKey: $(publicKey)
+      sshKeySecureFile: 'id_rsa'
   - script: |
       java --version
     displayName: 'Checking Java Version'

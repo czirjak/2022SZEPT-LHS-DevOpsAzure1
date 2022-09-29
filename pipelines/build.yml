@@ -34,7 +34,7 @@ steps:
     displayName: 'Build docker image'
   - script: |
       echo 'Running integration tests on container'
-     displayName: 'Running tests on container'
+    displayName: 'Running tests on container'
   - script: |
       chmod 777 ./tag.sh
       ls -l

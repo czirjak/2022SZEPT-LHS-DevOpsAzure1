@@ -27,12 +27,12 @@ steps:
 # itt még futtatunk teszteket stb.
   - script: |
       chmod 777 ./tag.sh
-      ls -l
-      ./tag.sh $(version)
+#      ls -l
+#      ./tag.sh $(version)
     displayName: 'Tag git branch'
   - script: |
       docker login -u $(username) -p $(password)
-      docker tag lecsobkw/simplejavaapp lecsobkw/simplejavaapp:$(version)
-      docker push lecsobkw/simplejavaapp:$(version)
+      docker tag lecsobkw/simplejavaapp lecsobkw/simplejavaapp:1.0
+      docker push lecsobkw/simplejavaapp:1.0
     displayName: 'Push docker image'
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))

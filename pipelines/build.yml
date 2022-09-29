@@ -32,7 +32,9 @@ steps:
       docker build --tag lecsobkw/simplejavaapp .
       docker images
     displayName: 'Build docker image'
-# itt még futtatunk teszteket stb.
+  - script: |
+    echo 'Running integration tests on container'
+    displayName: 'Running tests on container'
   - script: |
       chmod 777 ./tag.sh
       ls -l

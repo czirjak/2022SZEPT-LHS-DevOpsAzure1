@@ -47,8 +47,14 @@ pipeline
         }
         stage('Tag git branch')
         {
-            steps {
-                sshagent(credentials: ['jenkins-user']) {
+            when
+            {
+                branch "main"
+            }
+            steps
+            {
+                sshagent(credentials: ['jenkins-user'])
+                {
                     sh '''
                         chmod 777 ./tag.sh
                         ./tag.sh $VERSION
@@ -58,6 +64,10 @@ pipeline
         }
         stage('Push docker image')
         {
+            when
+            {
+                branch "main"
+            }
             steps
             {
                 sh "docker login -u $DOCKER_SECRET_USR -p $DOCKER_SECRET_PSW"

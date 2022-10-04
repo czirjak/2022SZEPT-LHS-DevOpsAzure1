@@ -5,6 +5,7 @@ pipeline
     environment
     {
         DOCKER_SECRET = credentials("licsak-docker")
+        VERSION=$(git rev-parse --short HEAD)
     }
     
     stages
@@ -46,9 +47,13 @@ pipeline
         }
         stage('Tag git branch')
         {
-            steps
-            {
-                echo 'TODO'
+            steps {
+                sshagent(credentials: ['jenkins-user']) {
+                    sh '''
+                        git tag -a $VERSION -m "version $VERSION"
+                        git push origin $VERSION
+                    '''
+                }
             }
         }
         stage('Push docker image')
@@ -56,8 +61,8 @@ pipeline
             steps
             {
                 sh "docker login -u $DOCKER_SECRET_USR -p $DOCKER_SECRET_PSW"
-                sh "docker tag lecsobkw/simplejavaapp lecsobkw/simplejavaapp:5.0"
-                sh "docker push lecsobkw/simplejavaapp:5.0"
+                sh "docker tag lecsobkw/simplejavaapp lecsobkw/simplejavaapp:$VERSION"
+                sh "docker push lecsobkw/simplejavaapp:$VERSION"
             }
         }
     }

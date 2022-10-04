@@ -49,7 +49,7 @@ pipeline
         {
             steps {
                 sshagent(credentials: ['jenkins-user']) {
-                    ./tag.sh $VERSION
+                    sh "./tag.sh $VERSION"
                 }
             }
         }

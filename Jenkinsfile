@@ -5,7 +5,6 @@ pipeline
     environment
     {
         DOCKER_SECRET = credentials("licsak-docker")
-        VERSION=$(git rev-parse --short HEAD)
     }
     
     stages
@@ -48,6 +47,7 @@ pipeline
         stage('Tag git branch')
         {
             steps {
+                VERSION=$(git rev-parse --short HEAD)
                 sshagent(credentials: ['jenkins-user']) {
                     sh '''
                         git tag -a $VERSION -m "version $VERSION"

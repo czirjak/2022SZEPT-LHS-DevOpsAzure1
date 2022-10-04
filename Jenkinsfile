@@ -49,10 +49,7 @@ pipeline
         {
             steps {
                 sshagent(credentials: ['jenkins-user']) {
-                    sh '''
-                        git tag -a $VERSION -m "version $VERSION"
-                        git push origin $VERSION
-                    '''
+                    ./tag.sh $VERSION
                 }
             }
         }

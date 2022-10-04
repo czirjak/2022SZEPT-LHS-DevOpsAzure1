@@ -47,9 +47,9 @@ pipeline
         stage('Tag git branch')
         {
             steps {
-                VERSION=$(git rev-parse --short HEAD)
                 sshagent(credentials: ['jenkins-user']) {
                     sh '''
+                        VERSION=$(git rev-parse --short HEAD)
                         git tag -a $VERSION -m "version $VERSION"
                         git push origin $VERSION
                     '''

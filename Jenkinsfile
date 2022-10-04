@@ -4,7 +4,7 @@ pipeline
 
     environment
     {
-        DOCKER_SECRET = credentials("lecsobkw-docker")
+        DOCKER_SECRET = credentials("licsak-docker")
     }
     
     stages

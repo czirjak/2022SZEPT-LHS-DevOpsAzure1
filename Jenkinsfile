@@ -5,7 +5,7 @@ pipeline
     environment
     {
         DOCKER_SECRET = credentials("licsak-docker")
-        VERSION=${ sh (script:'git rev-parse --short HEAD')}
+        VERSION="${ sh (script:'git rev-parse --short HEAD')}"
     }
     
     stages
